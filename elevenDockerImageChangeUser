@@ -1,0 +1,10 @@
+#!/bin/sh
+  USER="${1}"
+  UID="$(id -u ${USER})"
+  GID="$(id -g ${USER})"
+  find / -not -path "/proc/*" -user ${UID} -exec chown -h -R 1000:1000 {} \;
+  find / -not -path "/proc/*" -group ${GID} -exec chown -h -R 1000:1000 {} \;
+  usermod -l docker ${USER}
+  groupmod -n docker ${USER}
+  usermod -u 1000 docker
+  groupmod -g 1000 docker

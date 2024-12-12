@@ -1,0 +1,28 @@
+#!/bin/sh
+  LOG_JSON_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+  LOG_JSON_TYPE=$(echo "${1}" | awk 'BEGIN { getline; print toupper($0) }')
+  case ${LOG_JSON_TYPE} in
+    DEBUG|DBG|DEB)
+      LOG_JSON_TYPE="DBG"
+    ;;
+
+    INFO|INF)
+      LOG_JSON_TYPE="INF"
+    ;;
+
+    WARNING|WARN|WRN)
+      LOG_JSON_TYPE="WRN"
+    ;;
+
+    ERROR|ERR)
+      LOG_JSON_TYPE="ERR"
+    ;;
+
+    *)
+      LOG_JSON_TYPE="INF"
+    ;;
+  esac
+
+  if [ ! -z ${DEBUG} ] || { [ -z ${DEBUG} ] && [ "${LOG_JSON_TYPE}" != "DEBUG" ]; }; then
+    echo "{\"time\":\"${LOG_JSON_DATE}\",\"type\":\"${LOG_JSON_TYPE}\",\"msg\":\"${2}\"}"
+  fi
