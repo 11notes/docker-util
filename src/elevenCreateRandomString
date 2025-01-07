@@ -4,4 +4,4 @@
   else
     MAX=${1}
   fi
-  echo "$(echo "$(date)" | sha512sum | cut -d' ' -f1 | awk '{print substr($0, 0, '${MAX}')}')"
+  echo "$(echo "${RANDOM}$(date)${RANDOM}" | sha512sum | cut -d' ' -f1 | awk '{print substr($0, 0, '${MAX}')}')"
