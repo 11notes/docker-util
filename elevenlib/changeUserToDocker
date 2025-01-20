@@ -1,4 +1,5 @@
 #!/bin/sh
+  # will change specified user to docker and chown all files of that user to 1000:1000
   # eleven changeUserToDocker node
 
   USER="${1}"

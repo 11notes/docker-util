@@ -1,4 +1,5 @@
 #!/bin/sh
+  # will replace libraries used in go.mod with their patched versions
   # eleven patchGoMod /go/app/go.mod "golang.org/x/net|v0.23.0|GHSA-4v7x-pqxf-cx7m"
 
   GO_MOD="${1}"

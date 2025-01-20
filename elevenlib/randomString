@@ -1,5 +1,5 @@
 #!/bin/sh
-
+  # returns a random string
   # eleven randomString
   # eleven randomString 32 (max length)
 
