@@ -1,0 +1,5 @@
+#!/bin/sh
+  # eleven init
+  
+  chmod +x -R /usr/local/bin/.eleven
+  eleven log debug "eleven util initialized"
