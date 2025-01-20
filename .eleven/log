@@ -1,0 +1,30 @@
+#!/bin/sh
+  # eleven log info "just an info message"
+
+  LOG_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+  LOG_TYPE=$(echo "${1}" | awk 'BEGIN { getline; print toupper($0) }')
+  case ${LOG_TYPE} in
+    DEBUG|DBG|DEB)
+      LOG_TYPE="DBG"
+    ;;
+
+    INFO|INF)
+      LOG_TYPE="INF"
+    ;;
+
+    WARNING|WARN|WRN)
+      LOG_TYPE="WRN"
+    ;;
+
+    ERROR|ERR)
+      LOG_TYPE="ERR"
+    ;;
+
+    *)
+      LOG_TYPE="INF"
+    ;;
+  esac
+
+  if [ ! -z ${DEBUG} ] || { [ -z ${DEBUG} ] && [ "${LOG_TYPE}" != "DEBUG" ]; }; then
+    echo "{\"time\":\"${LOG_DATE}\",\"type\":\"${LOG_TYPE}\",\"msg\":\"${2}\"}"
+  fi

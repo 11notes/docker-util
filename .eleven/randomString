@@ -1,4 +1,8 @@
 #!/bin/sh
+
+  # eleven randomString
+  # eleven randomString 32
+
   if [ -z "${1}" ]; then
     MAX=64
   else

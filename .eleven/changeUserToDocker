@@ -1,4 +1,6 @@
 #!/bin/sh
+  # eleven changeUserToDocker node
+
   USER="${1}"
   UID="$(id -u ${USER})"
   GID="$(id -g ${USER})"

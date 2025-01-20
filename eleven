@@ -1,0 +1,19 @@
+#!/bin/sh
+  DIR=/usr/local/bin/.eleven
+  FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+  shift
+
+  if [ -z "${FN}" ]; then
+    eleven log warning "you need to specify a function to call"
+    exit 1
+  else
+    SCRIPT=${DIR}/${FN}
+    if [ -f ${SCRIPT} ]; then
+      set -- "${SCRIPT}" "${@}"
+    else
+      eleven log warning "function ${FN} does not exist"
+      exit 1
+    fi
+  fi
+
+  exec "$@"
