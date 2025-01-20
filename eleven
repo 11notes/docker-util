@@ -1,5 +1,5 @@
 #!/bin/sh
-  DIR=/usr/local/bin/libeleven
+  DIR=/usr/local/bin/elevenlib
   FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
   shift
 
