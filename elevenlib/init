@@ -1,0 +1,8 @@
+#!/bin/sh
+  # eleven init
+
+  echo "eleven functions available:"
+
+  for fn in /usr/local/bin/elevenlib/*; do
+    echo "\t- ${fn}"
+  done
