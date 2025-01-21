@@ -3,6 +3,7 @@
 
   echo "eleven functions available:"
 
-  for fn in /usr/local/bin/elevenlib/*; do
-    echo "- ${fn}"
+  for FN in /usr/local/bin/elevenlib/*; do
+    FN=$(echo ${FN} | sed "s#/usr/local/bin/elevenlib/##")
+    echo "- ${FN}"
   done

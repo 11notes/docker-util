@@ -1,4 +1,5 @@
 #!/bin/sh
+  # prints a log message to stdout formatted as a json object
   # eleven log info "just an info message"
 
   LOG_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
