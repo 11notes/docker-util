@@ -1,0 +1,11 @@
+{
+  "image":"11notes/util",
+  "description":"Eleven lib for Docker images",
+  "name":"util",
+  "version":"1.0.0",
+  "root":"/",
+  
+  "stable":"1.0.0",
+  "latest":"1.0.0",
+  "parent":"11notes/alpine:stable"
+}
