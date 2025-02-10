@@ -1,9 +1,0 @@
-#!/bin/sh
-  # eleven init
-
-  echo "eleven functions available:"
-
-  for FN in /usr/local/bin/elevenlib/*; do
-    FN=$(echo ${FN} | sed "s#/usr/local/bin/elevenlib/##")
-    echo "- ${FN}"
-  done

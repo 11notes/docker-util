@@ -1,0 +1,9 @@
+#!/bin/sh
+  # eleven init
+  DIR=/usr/local/bin/.eleven
+  echo "eleven functions available:"
+
+  for FN in ${DIR}/*; do
+    FN=$(echo ${FN} | sed "s#${DIR}/##")
+    echo "- ${FN}"
+  done
