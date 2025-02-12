@@ -4,5 +4,7 @@
 
   find / -not -path "/proc/*" -user 1000 -exec chown -h -R 99:100 {} \;
   find / -not -path "/proc/*" -group 1000 -exec chown -h -R 99:100 {} \;
+  groupdel -f docker
   usermod -u 99 docker
-  groupmod -g 100 docker
+  usermod -g 100 docker
+  groupmod -n docker users
