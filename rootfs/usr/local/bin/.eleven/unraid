@@ -1,10 +1,17 @@
 #!/bin/sh
-  # will change existing docker user uid 1000 and gid 1000 to 99 and 100 for unraid compatibility
+  # will change existing docker user uid 1000 and gid 1000 to ${UNRAID_UID} and ${UNRAID_GID} for unraid compatibility
   # eleven unraid
 
-  find / -not -path "/proc/*" -user 1000 -exec chown -h -R 99:100 {} \;
-  find / -not -path "/proc/*" -group 1000 -exec chown -h -R 99:100 {} \;
-  groupdel -f docker
-  usermod -u 99 docker
-  usermod -g 100 docker
-  groupmod -n docker users
+  UNRAID_UID=99
+  UNRAID_GID=100
+
+  if [ "${APP_UID}" = "${UNRAID_UID}" ] && [ "${APP_GID}" = "${UNRAID_GID}" ]; then
+    find / -not -path "/proc/*" -user 1000 -exec chown -h -R ${UNRAID_UID}:${UNRAID_GID} {} \;
+    find / -not -path "/proc/*" -group 1000 -exec chown -h -R ${UNRAID_UID}:${UNRAID_GID} {} \;
+    groupdel -f docker
+    usermod -u ${UNRAID_UID} docker
+    usermod -g ${UNRAID_GID} docker
+    groupmod -n docker users
+
+    eleven log info "changed 1000:1000 to ${UNRAID_UID}:${UNRAID_GID}"
+  fi
