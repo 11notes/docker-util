@@ -1,0 +1,5 @@
+#!/bin/sh
+  # will pretty print the environment
+  # eleven printenv
+
+  env -0 | sort -z | tr '\0' '\n'
