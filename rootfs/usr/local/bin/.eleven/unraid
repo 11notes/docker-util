@@ -1,0 +1,8 @@
+#!/bin/sh
+  # will change existing docker user uid 1000 and gid 1000 to 99 and 100 for unraid compatibility
+  # eleven unraid
+
+  find / -not -path "/proc/*" -user 1000 -exec chown -h -R 99:100 {} \;
+  find / -not -path "/proc/*" -group 1000 -exec chown -h -R 99:100 {} \;
+  usermod -u 99 docker
+  groupmod -g 100 docker

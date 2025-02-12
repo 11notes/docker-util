@@ -1,0 +1,15 @@
+name: main
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:   
+      - name: build docker image
+        uses: benc-uk/workflow-dispatch@e2e5e9a103e331dad343f381a29e654aea3cf8fc
+        with:
+          workflow: docker.yml
+          token: "${{ secrets.REPOSITORY_TOKEN }}"
+          inputs: '{ "release":"true" }'

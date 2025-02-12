@@ -3,7 +3,7 @@
 
 # :: Run
   USER root
-  COPY ./rootfs /
+  COPY --chown=1000:1000 ./rootfs /
   RUN set -ex; \
     chmod +x -R /usr/local/bin; \
     chmod +x -R /usr/local/bin/.eleven; \
