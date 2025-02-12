@@ -2,4 +2,10 @@
   # will pretty print the environment
   # eleven printenv
 
+  echo "////////////////////////////////////////////////////////////////"
+  echo ""
+  echo "                    E N V I R O N M E N T                       "
+  echo ""
   env -0 | sort -z | tr '\0' '\n'
+  echo ""
+  echo "////////////////////////////////////////////////////////////////"
