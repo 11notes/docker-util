@@ -10,9 +10,13 @@
       MOD=$(echo "${DETAILS}" | sed '1!d')
       FIX=$(echo "${DETAILS}" | sed '2!d')
       ISSUE=$(echo "${DETAILS}" | sed '3!d')
-      sed -i 's#'${MOD}' .\+[0-9]\+#'${MOD}' '${FIX}'#g' ${GO_MOD}
-      if [ $? ]; then
-        eleven log debug "fixing ${ISSUE} for module ${MOD} in ${GO_MOD}"
+      if cat ${GO_MOD} | grep -qE "${MOD} ${FIX}"; then
+        exit 0
+      else        
+        sed -i 's#'${MOD}' .\+[0-9]\+#'${MOD}' '${FIX}'#g' ${GO_MOD}
+        if [ $? ]; then
+          eleven log fix "$@"
+        fi
       fi
     done
   fi

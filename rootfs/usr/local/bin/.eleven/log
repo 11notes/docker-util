@@ -27,6 +27,10 @@
       LOG_MESSAGE="starting ${APP_NAME} v${APP_VERSION}"
     ;;
 
+    PATCH|FIX)
+      LOG_TYPE="FIX"
+    ;;
+
     *)
       LOG_TYPE="INF"
     ;;
