@@ -15,7 +15,7 @@
       else        
         sed -i 's#'${MODULE}' .\+[0-9]\+#'${MODULE}' '${FIX}'#g' ${GO_MOD_FILE}
         if [ $? ]; then
-          eleven log fix "golang|${DETAILS}"
+          eleven log fix "golang|${MODULE}|${FIX}|${ISSUE}"
         fi
       fi
     done
