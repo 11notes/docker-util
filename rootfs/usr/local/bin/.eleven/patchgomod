@@ -2,20 +2,20 @@
   # will replace libraries used in go.mod with their patched versions
   # eleven patchGoMod /go/app/go.mod "golang.org/x/net|v0.23.0|GHSA-4v7x-pqxf-cx7m"
 
-  GO_MOD="${1}"
+  GO_MOD_FILE="${1}"
   shift
-  if [ -f ${GO_MOD} ]; then
+  if [ -f ${GO_MOD_FILE} ]; then
     for GoIssue in "$@"; do
       DETAILS=$(echo "${GoIssue}" | tr "|" "\n")
-      MOD=$(echo "${DETAILS}" | sed '1!d')
+      MODULE=$(echo "${DETAILS}" | sed '1!d')
       FIX=$(echo "${DETAILS}" | sed '2!d')
       ISSUE=$(echo "${DETAILS}" | sed '3!d')
-      if cat ${GO_MOD} | grep -qE "${MOD} ${FIX}"; then
+      if cat ${GO_MOD_FILE} | grep -qE "${MODULE} ${FIX}"; then
         exit 0
       else        
-        sed -i 's#'${MOD}' .\+[0-9]\+#'${MOD}' '${FIX}'#g' ${GO_MOD}
+        sed -i 's#'${MODULE}' .\+[0-9]\+#'${MODULE}' '${FIX}'#g' ${GO_MOD_FILE}
         if [ $? ]; then
-          eleven log fix "$@"
+          eleven log fix "golang|${DETAILS}"
         fi
       fi
     done
