@@ -1,0 +1,23 @@
+#!/bin/sh
+  # create folders (forced) with single level brace expansion
+  # eleven mkdir /path/folder
+  # eleven mkdir /path/to/{foo,bar}
+
+  PREFIX=""
+  FOLDERS=""
+  for PART in $(echo "${1}" | tr "/" "\n"); do
+    if echo ${PART} | grep -qE "\{.+\}"; then
+      for SUBPART in $(echo "${PART}" | sed -E 's/[\{\}]+//ig' | tr "," "\n"); do
+        FOLDERS=$(echo -e  "${FOLDERS}\n${PREFIX}/${SUBPART}")
+      done
+    else
+      FOLDERS=$(echo -e  "${FOLDERS}\n${PREFIX}/${PART}")
+      PREFIX="${PREFIX}/${PART}"
+    fi
+  done
+
+  for FOLDER in $(echo -e "${FOLDERS}" | tac); do
+    if [ ! -d "${FOLDER}" ]; then
+      mkdir -p "${FOLDER}"
+    fi
+  done
