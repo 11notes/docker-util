@@ -16,7 +16,7 @@
     fi
   done
 
-  for FOLDER in $(echo -e "${FOLDERS}" | tac); do
+  for FOLDER in $(echo -e "${FOLDERS}" | sort -rn); do
     if [ ! -d "${FOLDER}" ]; then
       mkdir -p "${FOLDER}"
     fi
