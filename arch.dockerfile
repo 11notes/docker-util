@@ -1,5 +1,6 @@
 # :: Header
   FROM 11notes/alpine:stable
+  ARG APP_NO_CACHE
 
 # :: Run
   USER root
