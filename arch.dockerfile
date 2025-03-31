@@ -1,5 +1,5 @@
 # :: Header
-  FROM 11notes/alpine:stable
+  FROM alpine AS build
   ARG APP_NO_CACHE
 
 # :: Run
@@ -8,5 +8,8 @@
   RUN set -ex; \
     chmod +x -R /usr/local/bin; \
     chmod +x -R /usr/local/bin/.eleven; \
-    eleven init;
-  USER docker
+    /usr/local/bin/eleven init;
+
+# :: Distroless
+  FROM scratch
+  COPY --from=build /usr/local/bin/ /usr/local/bin
