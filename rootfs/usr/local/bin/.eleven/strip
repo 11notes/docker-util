@@ -1,0 +1,8 @@
+#!/bin/sh
+  # eleven strip /path/to/binary/to/be/stripped
+  BYTES_START=$(du -b ${1} | cut -f1)
+  strip -v ${1} &> /dev/null
+  upx -q ${1} &> /dev/null
+  BYTES_END=$(du -b ${1} | cut -f1)
+  BYTES_PERCENT=$((100 - (200*${BYTES_END}/${BYTES_START} % 2 + 100*${BYTES_END}/${BYTES_START})))
+  eleven log info "${1} was shrunk by ${BYTES_PERCENT}%!"
