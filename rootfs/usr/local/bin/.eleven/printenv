@@ -8,4 +8,9 @@
   echo ""
   env -0 | sort -z | tr '\0' '\n'
   echo ""
+  echo ""
+  echo "                       P L A T F O R M                          "
+  echo "                       $(uname -s)/$(uname -m)"
+  echo ""
+  echo ""
   echo "////////////////////////////////////////////////////////////////"
