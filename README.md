@@ -12,6 +12,13 @@ These are the main tags for the image. There is also a tag for each commit and i
 * [stable](https://hub.docker.com/r/11notes/util/tags?name=stable)
 * [latest](https://hub.docker.com/r/11notes/util/tags?name=latest)
 
+# REPOSITORIES ☁️
+```
+docker pull 11notes/util:1.1.0
+docker pull ghcr.io/11notes/util:1.1.0
+docker pull quay.io/11notes/util:1.1.0
+```
+
 # SYNOPSIS 📖
 **What can I do with this?** This image provides you with eleven lib. A collection of simple yet useful tools to manage applications inside containers.
 
@@ -24,4 +31,4 @@ These are the main tags for the image. There is also a tag for each commit and i
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-util/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-util/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-util/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 31.03.2025, 11:44:26 (CET)*
+*created 10.04.2025, 15:11:35 (CET)*
