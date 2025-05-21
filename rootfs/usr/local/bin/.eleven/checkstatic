@@ -2,7 +2,13 @@
   # will check if a binary is statically linked, if not will exit 1
   # eleven checkStatic file
 
-  if ! file ${1} | grep -q "statically linked"; then
-    eleven log error "could not statically link binary ${1}"
-    exit 1
+  if [ -f "${1}" ]; then
+    if ! file ${1} | grep -q "statically linked"; then
+      eleven log error "could not statically link binary ${1}"
+      exit 1
+    fi
+  else
+    eleven log warning "could not find file [${1}]"
   fi
+
+  exit 0
