@@ -1,3 +1,4 @@
 #!/bin/ash
-  # run eleven strip on all binaries in the default Linux folders and a user specified ones
-  find /bin /sbin /usr/bin /usr/sbin /usr/local $@ -type f -executable -exec ash /usr/local/bin/eleven strip {} \;
+  # run eleven strip on all folders provided
+  # eleven rstrip /bin /sbin /usr/bin /usr/sbin /usr/local 
+  find $@ -type f -executable -exec ash /usr/local/bin/eleven strip {} \;
