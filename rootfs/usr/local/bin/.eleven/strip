@@ -3,6 +3,7 @@
 
   if ! echo "${1}" | grep -q ".so"; then
     if [ -f "${1}" ]; then
+      chmod +x ${1}
       BYTES_START=$(du -b ${1} | cut -f1)
       /usr/local/bin/strip -v ${1} &> /dev/null
       /usr/local/bin/upx -q -9 ${1} &> /dev/null

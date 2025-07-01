@@ -3,6 +3,7 @@
   # eleven checkStatic file
 
   if [ -f "${1}" ]; then
+    chmod +x ${1}
     if ! /usr/local/bin/file ${1} | grep -q "statically linked"; then
       eleven log error "could not statically link binary ${1}"
       exit 1
