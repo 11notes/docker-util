@@ -31,4 +31,3 @@
   COPY --from=distroless-file / /
   COPY --from=distroless-pv / /
   COPY --from=file-system /usr/local/bin /usr/local/bin
-  COPY --from=binutils /usr/local/bin /usr/local/bin
