@@ -1,0 +1,13 @@
+#!/bin/sh
+  FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+  shift
+
+  case "${FN}" in
+    "build")
+      go build -ldflags="-extldflags=-static" -o ${1} ${2};
+    ;;
+    *) 
+      eleven log warning "function ${FN} does not exist"
+      exit 1
+    ;;
+  esac
