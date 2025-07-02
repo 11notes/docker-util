@@ -2,5 +2,5 @@
   # finds files with set SUID or GUID as root and exits the script with exit code 1 if one is found
   # eleven checkRootless
 
-  find / -user root -perm -4000 -exec exit 1 \;
+  find / -user root -perm -4000 -exec ls -ldb {} \; -exec exit 1 \;
   exit 0
