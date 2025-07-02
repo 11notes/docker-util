@@ -4,10 +4,10 @@
 
   case "${FN}" in
     *) 
-      eleven checkStatic ${1}
-      eleven strip ${1}
+      eleven checkStatic ${FN}
+      eleven strip ${FN}
       mkdir -p /distroless/usr/local/bin
-      cp ${1} /distroless/usr/local/bin
+      cp ${FN} /distroless/usr/local/bin
     ;;
 
     "nostrip") 
