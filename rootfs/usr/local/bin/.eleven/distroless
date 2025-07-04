@@ -1,13 +1,18 @@
 #!/bin/sh
-  FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
-  shift
+  if [ -z "${2}" ]; then
+    FN="strip"
+    set -- "${1}"
+  else
+    FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+    shift
+  fi
 
   case "${FN}" in
-    *) 
-      eleven checkStatic ${FN}
-      eleven strip ${FN}
+    "strip") 
+      eleven checkStatic ${1}
+      eleven strip ${1}
       mkdir -p /distroless/usr/local/bin
-      cp ${FN} /distroless/usr/local/bin
+      cp ${1} /distroless/usr/local/bin
     ;;
 
     "nostrip") 
