@@ -6,7 +6,7 @@
       chmod +x ${1}
       BYTES_START=$(du -b ${1} | cut -f1)
       /usr/local/bin/strip -v ${1} &> /dev/null
-      /usr/local/bin/upx -q -9 ${1} &> /dev/null
+      /usr/local/bin/upx -q --best --ultra-brute --no-backup ${1} &> /dev/null
       BYTES_END=$(du -b ${1} | cut -f1)
       BYTES_PERCENT=$((100 - (200*${BYTES_END}/${BYTES_START} % 2 + 100*${BYTES_END}/${BYTES_START})))
       eleven log info "${1} was shrunk by ${BYTES_PERCENT}%!"
