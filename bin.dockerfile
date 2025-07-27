@@ -1,19 +1,18 @@
 # ╔═════════════════════════════════════════════════════╗
 # ║                       SETUP                         ║
 # ╚═════════════════════════════════════════════════════╝
-  # :: FOREIGN IMAGES
+# :: FOREIGN IMAGES
   FROM 11notes/distroless:upx AS distroless-upx
   FROM 11notes/distroless:strip AS distroless-strip
   FROM 11notes/distroless:file AS distroless-file
   FROM 11notes/distroless:pv AS distroless-pv
+  FROM 11notes/distroless:curl AS distroless-curl
 
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
 # ╚═════════════════════════════════════════════════════╝
-  # :: file system
+# :: FILE SYSTEM
   FROM alpine AS file-system
-  ARG APP_NO_CACHE
-  USER root
 
   COPY ./rootfs /
 
@@ -30,4 +29,5 @@
   COPY --from=distroless-strip / /
   COPY --from=distroless-file / /
   COPY --from=distroless-pv / /
+  COPY --from=distroless-curl / /
   COPY --from=file-system /usr/local/bin /usr/local/bin

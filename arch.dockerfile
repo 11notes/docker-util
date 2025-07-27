@@ -1,10 +1,9 @@
+
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
 # ╚═════════════════════════════════════════════════════╝
-  # :: file system
+# :: FILE SYSTEM
   FROM alpine AS file-system
-  ARG APP_NO_CACHE
-  USER root
 
   COPY ./rootfs /
 
@@ -15,6 +14,6 @@
 # ╔═════════════════════════════════════════════════════╗
 # ║                       IMAGE                         ║
 # ╚═════════════════════════════════════════════════════╝
-  # :: HEADER
+# :: HEADER
   FROM scratch
   COPY --from=file-system /usr/local/bin /usr/local/bin

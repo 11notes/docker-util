@@ -6,6 +6,7 @@
     "build")
       go build -ldflags="-extldflags=-static" -o ${1} ${2};
     ;;
+    
     *) 
       eleven log warning "function ${FN} does not exist"
       exit 1
