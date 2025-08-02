@@ -1,0 +1,36 @@
+#!/bin/sh
+  FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+  shift
+
+  case "${FN}" in
+    "slice")
+      GITHUB_REPO=https://github.com${1}.git
+      GITHUB_PROJECT=$(echo "${1}" | awk -F '/' '{print $NF}')
+      shift
+      GITHUB_COMMIT=${1}
+      shift
+
+      git clone --filter=tree:0 --no-checkout --sparse ${GITHUB_REPO}
+      cd ./${GITHUB_PROJECT}
+      git reset --hard ${GITHUB_COMMIT}
+
+      for SPARSE in ${@}; do
+        git sparse-checkout add ${SPARSE}
+      done
+      
+      eleven log info "github repo successfully sparse checkout"
+    ;;
+
+    "clone")
+      if [ -z ${2} ]; then
+        git clone --recurse-submodules -j8 https://github.com/${1} /
+      else
+        git clone --recurse-submodules -j8 https://github.com/${1} -b ${2} /
+      fi
+    ;;
+
+    *) 
+      eleven log warning "function ${FN} does not exist"
+      exit 1
+    ;;
+  esac
