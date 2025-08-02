@@ -6,27 +6,27 @@
     "sha256")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
       /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
-      echo "${2} ${ASSET}" | sha256sum -c
-      /usr/local/bin/pv ${ASSET} | tar xz;      
+      echo "${2} ${ASSET}" | sha256sum -c &> /dev/null
+      /usr/local/bin/pv ${ASSET} | tar xz;
     ;;
 
     "sha256-sum")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
       /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
       ASSET_SHA256=$(/usr/local/bin/curl -sSL ${2} | grep "${ASSET}" | sed 's/ '${ASSET}'//')
-      echo "${ASSET_SHA256} ${ASSET}" | sha256sum -c
-      /usr/local/bin/pv ${ASSET} | tar xz;      
+      echo "${ASSET_SHA256} ${ASSET}" | sha256sum -c &> /dev/null
+      /usr/local/bin/pv ${ASSET} | tar xz;
     ;;
 
     "gpg-asc")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
       /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
       /usr/local/bin/curl -sSL ${2} -o ${ASSET}.asc; \
-      gpg --verify ${ASSET}.asc ${ASSET}
-      /usr/local/bin/pv ${ASSET} | tar xz;      
+      gpg --verify ${ASSET}.asc ${ASSET} &> /dev/null
+      /usr/local/bin/pv ${ASSET} | tar xz;
     ;;
 
-    *) 
+    *)
       eleven log warning "function ${FN} does not exist"
       exit 1
     ;;
