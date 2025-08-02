@@ -9,7 +9,7 @@
       GITHUB_ASSET=$(echo ${GITHUB_ASSET_URL} | awk -F '/' '{print $NF}')
       /usr/local/bin/curl -sSL ${GITHUB_ASSET_URL} -o ${GITHUB_ASSET}; \
       if [ "${GITHUB_ASSET_SHA256}" != "null" ]; then
-        echo "${GITHUB_ASSET_SHA256} ${GITHUB_ASSET}" | sha256sum -c
+        echo "${GITHUB_ASSET_SHA256} ${GITHUB_ASSET}" | sha256sum -c &> /dev/null
       else
         eleven log warning "could not get sha256 sum of binary payload since none was found!"
       fi
