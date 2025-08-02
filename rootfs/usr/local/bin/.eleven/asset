@@ -10,6 +10,14 @@
       /usr/local/bin/pv ${ASSET} | tar xz;      
     ;;
 
+    "sha256-sum")
+      ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
+      /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
+      ASSET_SHA256=$(/usr/local/bin/curl -sSL ${2} | grep "${ASSET}" | sed 's/ '${ASSET}'//')
+      echo "${ASSET_SHA256} ${ASSET}" | sha256sum -c
+      /usr/local/bin/pv ${ASSET} | tar xz;      
+    ;;
+
     "gpg-asc")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
       /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
