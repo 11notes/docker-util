@@ -23,9 +23,9 @@
 
     "clone")
       if [ -z ${2} ]; then
-        git clone --recurse-submodules -j8 https://github.com/${1} /
+        git clone --recurse-submodules -j8 https://github.com/${1}
       else
-        git clone --recurse-submodules -j8 https://github.com/${1} -b ${2} /
+        git clone --recurse-submodules -j8 https://github.com/${1} -b ${2}
       fi
     ;;
 
