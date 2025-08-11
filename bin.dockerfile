@@ -7,6 +7,7 @@
   FROM 11notes/distroless:file AS distroless-file
   FROM 11notes/distroless:pv AS distroless-pv
   FROM 11notes/distroless:curl AS distroless-curl
+  FROM 11notes/distroless:jq AS distroless-jq
 
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
@@ -30,4 +31,5 @@
   COPY --from=distroless-file / /
   COPY --from=distroless-pv / /
   COPY --from=distroless-curl / /
+  COPY --from=distroless-jq / /
   COPY --from=file-system /usr/local/bin /usr/local/bin
