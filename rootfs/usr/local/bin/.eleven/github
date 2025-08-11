@@ -14,15 +14,18 @@
 
       GITHUB_ASSET=$(echo ${GITHUB_ASSET_URL} | awk -F '/' '{print $NF}')
       GITHUB_ASSET_EXTENSION=$(echo ${GITHUB_ASSET} | awk -F '.'  '{print $NF}')
+      eleven log info "downloading ${GITHUB_ASSET} from github ..."
       /usr/local/bin/curl -sSL ${GITHUB_ASSET_URL} -o ${GITHUB_ASSET}
 
       if [ $(echo "${GITHUB_ASSET_SHA256}" | wc -m) -ge 64 ]; then
+        eleven log info "verify checksum of ${GITHUB_ASSET} ..."
         echo "${GITHUB_ASSET_SHA256} ${GITHUB_ASSET}" | sha256sum -c &> /dev/null
       else
         eleven log warning "could not get sha256 checksum for ${1}"
       fi
 
       if echo ${GITHUB_ASSET_EXTENSION} | grep -qE "xz|gz|tar|zip|rar|7z"; then
+        eleven log info "unpacking ${GITHUB_ASSET} ..."
         /usr/local/bin/pv ${GITHUB_ASSET} | tar xz;
       fi
     ;;
