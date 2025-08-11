@@ -4,8 +4,8 @@
 
   case "${FN}" in
     "asset")
-      GITHUB_ASSET_SHA256=$(/usr/local/bin/curl -s -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${1}/releases | jq --raw-output '.[] | select(.tag_name == "'${2}'") | .assets[] | select(.name == "'${3}'") | .digest' | sed 's/sha256://')
-      GITHUB_ASSET_URL=$(/usr/local/bin/curl -s -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${1}/releases | jq --raw-output '.[] | select(.tag_name == "'${2}'") | .assets[] | select(.name == "'${3}'") | .browser_download_url')
+      GITHUB_ASSET_SHA256=$(/usr/local/bin/curl -s -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${1}/releases | /usr/local/bin/jq --raw-output '.[] | select(.tag_name == "'${2}'") | .assets[] | select(.name == "'${3}'") | .digest' | sed 's/sha256://')
+      GITHUB_ASSET_URL=$(/usr/local/bin/curl -s -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/${1}/releases | /usr/local/bin/jq --raw-output '.[] | select(.tag_name == "'${2}'") | .assets[] | select(.name == "'${3}'") | .browser_download_url')
       
       if ! echo "${GITHUB_ASSET_URL}" | grep -q "https"; then
         eleven log warning "could not get a release for ${1}"
@@ -13,6 +13,7 @@
       fi
 
       GITHUB_ASSET=$(echo ${GITHUB_ASSET_URL} | awk -F '/' '{print $NF}')
+      GITHUB_ASSET_EXTENSION=$(echo ${GITHUB_ASSET} | awk -F '.'  '{print $NF}')
       /usr/local/bin/curl -sSL ${GITHUB_ASSET_URL} -o ${GITHUB_ASSET}
 
       if [ $(echo "${GITHUB_ASSET_SHA256}" | wc -m) -ge 64 ]; then
@@ -21,7 +22,9 @@
         eleven log warning "could not get sha256 checksum for ${1}"
       fi
 
-      /usr/local/bin/pv ${GITHUB_ASSET} | tar xz;
+      if echo ${GITHUB_ASSET_EXTENSION} | grep -qE "xz|gz|tar|zip|rar|7z"; then
+        /usr/local/bin/pv ${GITHUB_ASSET} | tar xz;
+      fi
     ;;
 
     *) 
