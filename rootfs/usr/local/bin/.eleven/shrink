@@ -2,13 +2,19 @@
   # eleven shrink /path/to/binary/to/be/stripped
 
   if [ -f "${1}" ]; then
-    chmod +x "${1}"
-    BYTES_START=$(du -b "${1}" | cut -f1)
-    /usr/local/bin/upx -q --best --ultra-brute --no-backup "${1}" &> /dev/null
-    BYTES_END=$(du -b "${1}" | cut -f1)
-    BYTES_PERCENT=$((100 - (200*${BYTES_END}/${BYTES_START} % 2 + 100*${BYTES_END}/${BYTES_START})))
-    BYTES_MB=$(((${BYTES_START} - ${BYTES_END})/1024))
-    eleven log info "${1} was shrunk by ${BYTES_MB}MB (${BYTES_PERCENT}%)!"
+    /usr/local/bin/upx -q --no-backup -9 --best --lzma $@ > /tmp/upx 2> /tmp/upx
+    if cat /tmp/upx | grep -q "Packed 1 file."; then
+      LINE=$(cat /tmp/upx | grep " -> " | sed 's/->/ /' | sed 's/  //')
+      BYTES_BEFORE=$(echo "${LINE}" | awk -F ' ' '{print $1}')
+      BYTES_AFTER=$(echo "${LINE}" | awk -F ' ' '{print $2}')
+      BYTES_PERCENT=$(echo "${LINE}" | awk -F ' ' '{print $3}')
+      FILE=$(echo "${LINE}" | awk -F ' ' '{print $5}')
+      if [ ${#FILE} -gt 0 ]; then
+        BYTES_SHRUNK=$(((${BYTES_BEFORE} - ${BYTES_AFTER})/1024))
+        eleven log info "${FILE} shrunk by ${BYTES_PERCENT} (~${BYTES_SHRUNK}kB)"
+      fi
+      rm -rf /tmp/upx
+    fi
   else
     eleven log warning "could not find file [${1}]"
     exit 1
