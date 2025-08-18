@@ -23,6 +23,7 @@ jobs:
               dockerfile:"bin.dockerfile",
               tag:"bin",
               version:"latest",
+              semver:{disable:{rolling: true}}
             };
             core.exportVariable('WORKFLOW_BASE64JSON', Buffer.from(JSON.stringify(etc)).toString('base64'));
 
