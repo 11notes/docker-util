@@ -1,3 +1,4 @@
+// analog to docker-util for shell and javascript in go
 package util
 
 import (
@@ -7,6 +8,7 @@ import (
 	"os"
 )
 
+// output log in json format with time stamp and simple string message
 func log(t string, m string){
 	l := "INF"
 	switch {
