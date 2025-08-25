@@ -1,4 +1,4 @@
 #!/bin/ash
   # run eleven strip on all folders provided
   # eleven rstrip /bin /sbin /usr/bin /usr/sbin /usr/local 
-  find $@ -type f -executable -exec /usr/local/bin/eleven strip {} \;
+  find $@ -type f -executable -exec /usr/local/bin/eleven strip "{}" \;
