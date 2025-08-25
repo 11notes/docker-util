@@ -4,13 +4,13 @@
   if ! echo "${1}" | grep -q ".so"; then
     if [ -f "${1}" ]; then
       chmod +x "${1}"
-      BYTES_START=$(du -b "${1}" | cut -f1)
+      BYTES_BEFORE=$(du -b "${1}" | cut -f1)
       /usr/local/bin/strip -v "${1}" &> /dev/null
       /usr/local/bin/upx -q --no-backup -9 --best --lzma "${1}" &> /dev/null
-      BYTES_END=$(du -b "${1}" | cut -f1)
-      BYTES_PERCENT=$((100 - (200*${BYTES_END}/${BYTES_START} % 2 + 100*${BYTES_END}/${BYTES_START})))
-      BYTES_MB=$(((${BYTES_START} - ${BYTES_END})/1024))
-    eleven log info "${1} was shrunk by ${BYTES_MB}MB (${BYTES_PERCENT}%)!"
+      BYTES_AFTER=$(du -b "${1}" | cut -f1)
+      BYTES_PERCENT=$((100 - (200*${BYTES_AFTER}/${BYTES_BEFORE} % 2 + 100*${BYTES_AFTER}/${BYTES_BEFORE})))
+      BYTES_SHRUNK=$(((${BYTES_BEFORE} - ${BYTES_AFTER})/1024))
+      eleven log info "${1} shrunk by ${BYTES_PERCENT}% (~${BYTES_SHRUNK}kB)"
     else
       eleven log warning "could not find file [${1}]"
       exit 1
