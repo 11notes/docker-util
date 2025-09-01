@@ -5,25 +5,25 @@
   case "${FN}" in
     "sha256")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
-      /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
+      /usr/local/bin/curl -sSL ${1} -o ${ASSET}
       echo "${2} ${ASSET}" | sha256sum -c &> /dev/null
-      /usr/local/bin/pv ${ASSET} | tar xz;
+      /usr/local/bin/pv ${ASSET} | tar $(eleven tar ? "${ASSET}")
     ;;
 
     "sha256-sum")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
-      /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
+      /usr/local/bin/curl -sSL ${1} -o ${ASSET}
       ASSET_SHA256=$(/usr/local/bin/curl -sSL ${2} | grep "${ASSET}" | sed 's/ '${ASSET}'//')
       echo "${ASSET_SHA256} ${ASSET}" | sha256sum -c &> /dev/null
-      /usr/local/bin/pv ${ASSET} | tar xz;
+      /usr/local/bin/pv ${ASSET} | tar $(eleven tar ? "${ASSET}")
     ;;
 
     "gpg-asc")
       ASSET=$(echo ${1} | awk -F '/' '{print $NF}')
-      /usr/local/bin/curl -sSL ${1} -o ${ASSET}; \
-      /usr/local/bin/curl -sSL ${2} -o ${ASSET}.asc; \
+      /usr/local/bin/curl -sSL ${1} -o ${ASSET}
+      /usr/local/bin/curl -sSL ${2} -o ${ASSET}.asc
       gpg --verify ${ASSET}.asc ${ASSET} &> /dev/null
-      /usr/local/bin/pv ${ASSET} | tar xz;
+      /usr/local/bin/pv ${ASSET} | tar $(eleven tar ? "${ASSET}")
     ;;
 
     *)
