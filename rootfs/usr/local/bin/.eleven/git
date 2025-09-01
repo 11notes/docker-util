@@ -17,7 +17,7 @@
       for SPARSE in ${@}; do
         git sparse-checkout add ${SPARSE}
       done
-      
+
       eleven log info "github repo successfully sparse checkout"
     ;;
 
