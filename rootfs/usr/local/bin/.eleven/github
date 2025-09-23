@@ -24,9 +24,12 @@
         eleven log warning "could not get sha256 checksum for ${1}"
       fi
 
-      if echo ${GITHUB_ASSET_EXTENSION} | grep -qE "xz|gz|tar|zip|rar|7z"; then
+      if echo ${GITHUB_ASSET_EXTENSION} | grep -qE "xz|gz|tar|rar|7z"; then
         eleven log info "unpacking ${GITHUB_ASSET} ..."
         /usr/local/bin/pv ${GITHUB_ASSET} | tar xz;
+      elif echo ${GITHUB_ASSET_EXTENSION} | grep -qE "zip"; then
+        eleven log info "unzipping ${GITHUB_ASSET} ..."
+        unzip ${GITHUB_ASSET};
       fi
     ;;
 
