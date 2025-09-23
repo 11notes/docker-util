@@ -9,6 +9,7 @@
   FROM 11notes/distroless:curl AS distroless-curl
   FROM 11notes/distroless:jq AS distroless-jq
   FROM 11notes/distroless:unrar AS distroless-unrar
+  FROM 11notes/distroless:ds AS distroless-ds
 
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
@@ -34,4 +35,5 @@
   COPY --from=distroless-curl / /
   COPY --from=distroless-jq / /
   COPY --from=distroless-unrar / /
+  COPY --from=distroless-ds / /
   COPY --from=file-system /usr/local/bin /usr/local/bin
