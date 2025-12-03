@@ -24,4 +24,4 @@ jobs:
           workflow: docker.yml
           wait-for-completion: false
           token: "${{ secrets.REPOSITORY_TOKEN }}"
-          inputs: '{ "release":"false", "readme":"false", "run-name":"build unraid ${{ github.ref_name }}", "etc":"eyJzZW12ZXJzdWZmaXgiOiJ1bnJhaWQiLCJ1aWQiOjk5LCJnaWQiOjEwMH0=" }'
+          inputs: '{ "release":"false", "readme":"false", "run-name":"build bin ${{ github.ref_name }}", "etc":"eyJzZW12ZXJzdWZmaXgiOiJ1bnJhaWQiLCJ1aWQiOjk5LCJnaWQiOjEwMH0=" }'
