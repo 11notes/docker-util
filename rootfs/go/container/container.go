@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"fmt"
 
-	"github.com/11notes/go/util"
+	"github.com/11notes/docker-util/rootfs/go/util"
 )
 
 type Container struct{}
