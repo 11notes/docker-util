@@ -1,4 +1,4 @@
-package eleven
+package _util
 
 import (
 	"os"
@@ -11,8 +11,10 @@ import (
 	"errors"
 )
 
+type Util struct{}
+
 // reads a file if it exists and returns the content of the file
-func ReadFile(path string) (string, error){
+func (c *Util) ReadFile(path string) (string, error){
 	bytes, err := ioutil.ReadFile(path)
 	if err != nil {
 		return "", err
@@ -21,7 +23,7 @@ func ReadFile(path string) (string, error){
 }
 
 // writes contents to a file
-func WriteFile(path string, txt string) error{
+func (c *Util) WriteFile(path string, txt string) error{
 	err := ioutil.WriteFile(path, []byte(txt), os.ModePerm)
 	if err != nil {
 		return err
@@ -30,7 +32,7 @@ func WriteFile(path string, txt string) error{
 }
 
 // checks if the command line argument exists (case-sensitive)
-func CommandLineArgumentExists(f string) bool{
+func (c *Util) CommandLineArgumentExists(f string) bool{
 	if(len(os.Args) > 1){
 		for _, a := range os.Args[1:] {
 			if(f == a){
@@ -43,7 +45,7 @@ func CommandLineArgumentExists(f string) bool{
 }
 
 // checks if an environment variable exists and if not assigns a default value
-func Getenv(key string, fallback string) string{
+func (c *Util) Getenv(key string, fallback string) string{
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}
@@ -51,9 +53,9 @@ func Getenv(key string, fallback string) string{
 }
 
 // checks if a file containing an environment variable exists and if not assigns a default value
-func GetenvFile(path string, fallback string) string{
+func (c *Util) GetenvFile(path string, fallback string) string{
 	if _, err := os.Stat(path); !os.IsNotExist(err) {
-		value, err := ReadFile(path)
+		value, err := c.ReadFile(path)
 		if err != nil {
 			return fallback
 		}
@@ -63,7 +65,7 @@ func GetenvFile(path string, fallback string) string{
 }
 
 // run an external program and return output
-func Run(bin string, params []string) (string, error){
+func (c *Util) Run(bin string, params []string) (string, error){
 	cmd := exec.Command(bin, params...)
 	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid:true}
 
