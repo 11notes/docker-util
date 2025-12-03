@@ -53,7 +53,7 @@ func Getenv(key string, fallback string) string{
 // checks if a file containing an environment variable exists and if not assigns a default value
 func GetenvFile(path string, fallback string) string{
 	if _, err := os.Stat(path); !os.IsNotExist(err) {
-		value, err := c.ReadFile(path)
+		value, err := ReadFile(path)
 		if err != nil {
 			return fallback
 		}
