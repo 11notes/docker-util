@@ -5,6 +5,8 @@ import (
 	"time"
 	"regexp"
 	"os"
+
+	"github.com/11notes/docker-util/rootfs/go/util"
 )
 
 // output log in json format with time current stamp and simple string message
