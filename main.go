@@ -31,6 +31,6 @@ func Log(t string, m string, args ...interface{}){
 
 // output log in json format with time current stamp and simple string message and exit process with exit code 1 error
 func LogFatal(m string, args ...interface{}){
-	eleven.Log("ERR", m, args...)
+	Log("ERR", m, args...)
 	os.Exit(1)
 }
