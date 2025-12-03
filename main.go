@@ -6,11 +6,15 @@ import (
 	"regexp"
 	"os"
 
+	"github.com/11notes/docker-util/rootfs/go/container"
+	"github.com/11notes/docker-util/rootfs/go/http"
 	"github.com/11notes/docker-util/rootfs/go/util"
 )
 
 var(
-	Util = &_util.Util{}
+	Container = &container.Container{}
+	HTTP = &http.HTTP{}
+	Util = &util.Util{}
 )
 
 // output log in json format with time current stamp and simple string message
