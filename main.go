@@ -10,7 +10,7 @@ import (
 )
 
 var(
-	util = &_util.Util{}
+	Util = &_util.Util{}
 )
 
 // output log in json format with time current stamp and simple string message
