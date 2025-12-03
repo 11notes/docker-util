@@ -40,7 +40,6 @@ func (c *Util) CommandLineArgumentExists(f string) bool{
 			}
 		}
 	}
-
 	return false
 }
 
