@@ -1,11 +1,10 @@
-
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
 # ╚═════════════════════════════════════════════════════╝
 # :: FILE SYSTEM
   FROM alpine AS file-system
 
-  COPY ./rootfs /
+  COPY ./rootfs/container /
 
   RUN set -ex; \
     chmod +x -R /usr/local/bin; \

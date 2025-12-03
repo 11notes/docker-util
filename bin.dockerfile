@@ -11,22 +11,24 @@
   FROM 11notes/distroless:unrar AS distroless-unrar
   FROM 11notes/distroless:ds AS distroless-ds
 
+
 # ╔═════════════════════════════════════════════════════╗
 # ║                       BUILD                         ║
 # ╚═════════════════════════════════════════════════════╝
 # :: FILE SYSTEM
   FROM alpine AS file-system
 
-  COPY ./rootfs /
+  COPY ./rootfs/container /
 
   RUN set -ex; \
     chmod +x -R /usr/local/bin; \
     chmod +x -R /usr/local/bin/.eleven;
 
+
 # ╔═════════════════════════════════════════════════════╗
 # ║                       IMAGE                         ║
 # ╚═════════════════════════════════════════════════════╝
-  # :: HEADER
+# :: HEADER
   FROM scratch
   COPY --from=distroless-upx / /
   COPY --from=distroless-strip / /
