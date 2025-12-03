@@ -13,8 +13,6 @@ These are the main tags for the image. There is also a tag for each commit and i
 
 * [3.1.3](https://hub.docker.com/r/11notes/util/tags?name=3.1.3)
 * [latest](https://hub.docker.com/r/11notes/util/tags?name=latest)
-* [3.1.3-unraid](https://hub.docker.com/r/11notes/util/tags?name=3.1.3-unraid)
-* [latest-unraid](https://hub.docker.com/r/11notes/util/tags?name=latest-unraid)
 
 # REGISTRIES ☁️
 ```
@@ -22,9 +20,6 @@ docker pull 11notes/util:3.1.3
 docker pull ghcr.io/11notes/util:3.1.3
 docker pull quay.io/11notes/util:3.1.3
 ```
-
-# UNRAID VERSION 🟠
-This image supports unraid by default. Simply add **-unraid** to any tag and the image will run as 99:100 instead of 1000:1000 causing no issues on unraid. Enjoy.
 
 # SOURCE 💾
 * [11notes/util](https://github.com/11notes/docker-util)
@@ -35,4 +30,4 @@ This image supports unraid by default. Simply add **-unraid** to any tag and the
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-util/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-util/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-util/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 03.12.2025, 21:11:50 (CET)*
+*created 03.12.2025, 21:21:40 (CET)*
