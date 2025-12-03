@@ -9,8 +9,8 @@ import (
 	"github.com/11notes/docker-util/rootfs/go/util"
 )
 
-var (
-	util = _util.Util{}
+var(
+	util = &_util.Util{}
 )
 
 // output log in json format with time current stamp and simple string message
