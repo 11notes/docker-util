@@ -9,6 +9,7 @@ import (
 	"bufio"
 	"io"
 	"errors"
+	"fmt"
 )
 
 type Util struct{}
@@ -65,6 +66,7 @@ func (c *Util) GetenvFile(path string, fallback string) string{
 
 // run an external program and return output
 func (c *Util) Run(bin string, params []string) (string, error){
+	_, debug := os.LookupEnv("DEBUG");
 	cmd := exec.Command(bin, params...)
 	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid:true}
 
@@ -74,7 +76,11 @@ func (c *Util) Run(bin string, params []string) (string, error){
 	go func() {
 		stdoutScanner := bufio.NewScanner(io.MultiReader(stdout,stderr))
 		for stdoutScanner.Scan() {
-			out = append(out, stdoutScanner.Text())
+			line := stdoutScanner.Text()
+			out = append(out, line)
+			if debug {
+				fmt.Println(line)
+			}
 		}
 	}()
 
