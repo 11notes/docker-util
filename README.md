@@ -6,7 +6,19 @@
 Eleven lib for Docker images
 
 # SYNOPSIS 📖
-**What can I do with this?** This image provides you with eleven lib. A collection of simple yet useful tools to manage applications inside containers.
+**What can I do with this?** This image provides you with eleven lib. A collection of simple yet useful tools to manage applications inside containers during build and during runtime. The images comes in two flavours:
+
+- Only scripts
+- Scripts and binaries
+
+You can also import the go package:
+```go
+import (
+  "github.com/11notes/docker-util"
+)
+```
+
+With usefull functions for entrypoints.
 
 # MAIN TAGS 🏷️
 These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
@@ -24,10 +36,7 @@ docker pull quay.io/11notes/util:3.1.3
 # SOURCE 💾
 * [11notes/util](https://github.com/11notes/docker-util)
 
-# PARENT IMAGE 🏛️
-* [${{ json_readme_parent_image }}](${{ json_readme_parent_url }})
-
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-util/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-util/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-util/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 03.12.2025, 22:04:48 (CET)*
+*created 07.01.2026, 11:51:55 (CET)*
