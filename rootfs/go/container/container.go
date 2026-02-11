@@ -72,6 +72,18 @@ func (c *Container) FileContentReplace(file string, r map[string]interface{}) er
 	return nil
 }
 
+// replaces all environment variables inside a file
+func (c *Container) EnvSubst(file string) error{
+	env := map[string]any{}
+	for _, e := range os.Environ() {
+		key := strings.Split(e, "=")[0]
+		value := os.Getenv(key)
+		env[key] = value
+	}
+
+	return c.FileContentReplace(file, env)
+}
+
 // converts an environment variable to a file
 func (c *Container) EnvToFile(env string, path string) error{
 	if value, ok := os.LookupEnv(env); ok {
