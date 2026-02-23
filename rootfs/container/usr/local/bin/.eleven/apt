@@ -7,7 +7,6 @@
 
   case "${FN}" in
     "install")
-      shift
       apt update -y
       apt install --no-install-recommends -y $@
       apt clean -y
