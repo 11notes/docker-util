@@ -1,0 +1,10 @@
+#!/bin/sh
+  # will clean up most common and known folders that contain temporary data
+  # eleven cleanup
+
+  rm -rf \
+    /tmp/* \
+    /var/lib/apt/lists/* \
+    /var/tmp/*
+
+  exit 0

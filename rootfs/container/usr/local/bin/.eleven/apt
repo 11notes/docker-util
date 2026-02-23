@@ -1,0 +1,21 @@
+#!/bin/sh
+  # will execute pre made apt commands to help keeping it clean and easy
+  # eleven apt [install]
+
+  FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+  shift
+
+  case "${FN}" in
+    "install")
+      shift
+      apt update -y
+      apt install --no-install-recommends -y $@
+      apt clean -y
+      rm -rf /var/lib/apt/lists/*
+    ;;
+
+    *) 
+      eleven log warning "function ${FN} does not exist"
+      exit 1
+    ;;
+  esac

@@ -1,0 +1,18 @@
+#!/bin/sh
+  # will execute pre made apk commands to help keeping it clean and easy
+  # eleven apk [add]
+
+  FN=$(echo "${1}" | tr '[:upper:]' '[:lower:]')
+  shift
+
+  case "${FN}" in
+    "add")
+      shift
+      apk --update --no-cache add $@
+    ;;
+
+    *) 
+      eleven log warning "function ${FN} does not exist"
+      exit 1
+    ;;
+  esac
