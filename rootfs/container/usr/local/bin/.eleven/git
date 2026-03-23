@@ -4,7 +4,7 @@
 
   case "${FN}" in
     "slice")
-      GITHUB_REPO=https://github.com${1}.git
+      GITHUB_REPO=https://github.com/${1}
       GITHUB_PROJECT=$(echo "${1}" | awk -F '/' '{print $NF}')
       shift
       GITHUB_COMMIT=${1}
@@ -29,7 +29,7 @@
       fi
     ;;
 
-    *) 
+    *)
       eleven log warning "function ${FN} does not exist"
       exit 1
     ;;
