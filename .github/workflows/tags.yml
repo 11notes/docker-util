@@ -20,11 +20,11 @@ jobs:
 
       - name: setup etc for org.build.yml with binaries
         run: |
-          echo "WORKFLOW_ETC_BASE64JSON_BIN=$(echo '{"unraid":false, "nobody":false, "build":{"dockerfile":"bin.dockerfile", "tag":"bin", "semver":{"disable":{"rolling":true}}}}' | base64 -w 0)" >> "${GITHUB_ENV}"
+          echo "WORKFLOW_ETC_BASE64JSON_BIN=$(echo '{"unraid":false, "nobody":false, "dockerfile":"bin.dockerfile", "tag":"bin", "semver":{"disable":{"rolling":true}}}' | base64 -w 0)" >> "${GITHUB_ENV}"
       - name: build container images
         uses: the-actions-org/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7
         with:
           workflow: org.build.yml
           wait-for-completion: false
           token: "${{ secrets.REPOSITORY_TOKEN }}"
-          inputs: '{ "ref":"${{ github.ref_name }}", "etc":"${{ env.WORKFLOW_ETC_BASE64JSON_BIN }}" }'
+          inputs: '{ "release":"false", "readme":"false", "ref":"${{ github.ref_name }}:bin", "etc":"${{ env.WORKFLOW_ETC_BASE64JSON_BIN }}" }'
