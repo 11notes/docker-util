@@ -11,10 +11,11 @@ jobs:
         run: |
           echo "WORKFLOW_ETC_BASE64JSON=$(echo '{"unraid":false, "nobody":false}' | base64 -w 0)" >> "${GITHUB_ENV}"
       - name: build container images
+        id: build
         uses: the-actions-org/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7
         with:
           workflow: org.build.yml
-          wait-for-completion: false
+          wait-for-completion: true
           token: "${{ secrets.REPOSITORY_TOKEN }}"
           inputs: '{ "ref":"${{ github.ref_name }}", "etc":"${{ env.WORKFLOW_ETC_BASE64JSON }}" }'
 
@@ -22,6 +23,7 @@ jobs:
         run: |
           echo "WORKFLOW_ETC_BASE64JSON_BIN=$(echo '{"unraid":false, "nobody":false, "dockerfile":"bin.dockerfile", "tag":"bin", "semver":{"disable":{"rolling":true}}}' | base64 -w 0)" >> "${GITHUB_ENV}"
       - name: build container images
+        if: steps.build.outputs.workflow-conclusion == 'success'
         uses: the-actions-org/workflow-dispatch@3133c5d135c7dbe4be4f9793872b6ef331b53bc7
         with:
           workflow: org.build.yml
