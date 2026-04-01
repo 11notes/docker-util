@@ -3,13 +3,6 @@ ${{ content_synopsis }} This image provides you with eleven lib. A collection of
 - Only scripts
 - Scripts and binaries
 
-You can also import the go package:
-```go
-import (
-  "github.com/11notes/docker-util"
-)
-```
-
 With usefull functions for entrypoints.
 
 ${{ content_source }}
