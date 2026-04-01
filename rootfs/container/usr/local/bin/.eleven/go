@@ -4,8 +4,27 @@
 
   case "${FN}" in
     "build")
+      # eleven go build /binary /go/src
       go mod tidy
       go build -ldflags="-extldflags=-static" -o ${1} ${2}
+    ;;
+
+    "patch")
+      # eleven go patch google.golang.org/grpc v1.79.3 CVE-2026-33186
+      if cat ./go.mod | grep -qE "${1} ${2}"; then
+        exit 0
+      else
+        sed -i 's#'${1}' .\+[0-9]\+#'${1}' '${2}'#g' ./go.mod
+        if [ $? ]; then
+          eleven log fix "CVE|${3}|${TARGETARCH}"
+        fi
+      fi
+    ;;
+
+    "upgrade")
+      # eleven go upgrade
+      go list -m -u all | awk '{print $1}' | xargs -n 1 go get -u
+      go mod verify
     ;;
 
     *)
