@@ -4,7 +4,8 @@
 
   case "${FN}" in
     "slice")
-      GITHUB_REPO=$(echo "https://github.com/${1}" | sed 's|\.git$||')
+      INPUT_REPO=$(echo "${1}" | sed 's|https://github.com/||')
+      GITHUB_REPO=$(echo "https://github.com/${INPUT_REPO}" | sed 's|\.git$||')
       GITHUB_REPO_API=$(echo "${GITHUB_REPO}" | sed 's|github\.com/|api.github.com/repos/|')
       GITHUB_PROJECT=$(curl -s ${GITHUB_REPO_API} | jq -r '.name')
       shift
@@ -23,11 +24,12 @@
     ;;
 
     "clone")
-      GITHUB_REPO=$(echo "https://github.com/${1}" | sed 's|\.git$||')
+      INPUT_REPO=$(echo "${1}" | sed 's|https://github.com/||')
+      GITHUB_REPO=$(echo "https://github.com/${INPUT_REPO}" | sed 's|\.git$||')
       if [ -z ${2} ]; then
-        git clone --recurse-submodules -j8 https://github.com/${GITHUB_REPO}
+        git clone --recurse-submodules -j8 ${GITHUB_REPO}
       else
-        git clone --recurse-submodules -j8 https://github.com/${GITHUB_REPO} -b ${2}
+        git clone --recurse-submodules -j8 ${GITHUB_REPO} -b ${2}
       fi
     ;;
 
