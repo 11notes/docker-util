@@ -15,8 +15,11 @@
         exit 0
       else
         sed -i 's#'${1}' .\+[0-9]\+#'${1}' '${2}'#g' ./go.mod
+        shift 2
         if [ $? ]; then
-          eleven log fix "CVE|${3}|${TARGETARCH}"
+          for CVE in ${@}; do
+            eleven log fix "CVE|${CVE}|${TARGETARCH:-amd64}"
+          done
         fi
       fi
     ;;
