@@ -11,10 +11,16 @@
 
     "patch")
       # eleven go patch google.golang.org/grpc v1.79.3 CVE-2026-33186
+      # eleven go patch google.golang.org/grpc latest CVE-2026-33186
       if cat ./go.mod | grep -qE "${1} ${2}"; then
         exit 0
       else
-        sed -i 's#'${1}' .\+[0-9]\+#'${1}' '${2}'#g' ./go.mod
+        if "${2}" == "latest"; then
+          LATEST=$(go list -m -f '{{.Version}}' "${1}@latest" 2>/dev/null)
+          sed -i 's#'${1}' .\+[0-9]\+#'${1}' '${LATEST}'#g' ./go.mod
+        else
+          sed -i 's#'${1}' .\+[0-9]\+#'${1}' '${2}'#g' ./go.mod
+        fi
         shift 2
         if [ $? ]; then
           for CVE in ${@}; do
