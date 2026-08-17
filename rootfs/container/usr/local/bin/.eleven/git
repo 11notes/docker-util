@@ -33,7 +33,7 @@
         if git clone --recurse-submodules -j8 ${GITHUB_REPO} -b ${BRANCH}; then
           exit 0
         else
-          if git clone --recurse-submodules ${1} -b v${BRANCH} /build; then
+          if git clone --recurse-submodules -j8 ${GITHUB_REPO} -b v${BRANCH}; then
             exit 0
           else
             eleven log error "eleven git clone could not find branch ${2} or v${2}!"
