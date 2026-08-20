@@ -5,9 +5,14 @@
   LOG_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
   LOG_TYPE=$(echo "${1}" | awk 'BEGIN { getline; print toupper($0) }')
   LOG_MESSAGE=${2}
+
+  NC='\033[0m'
+  COLOUR=''
+
   case ${LOG_TYPE} in
     DEBUG|DBG|DEB)
       LOG_TYPE="DBG"
+      COLOUR='\033[0;35m'
     ;;
 
     INFO|INF|IN)
@@ -16,10 +21,12 @@
 
     WARNING|WARN|WRN)
       LOG_TYPE="WRN"
+      COLOUR='\033[1;33m'
     ;;
 
     ERROR|ERR)
       LOG_TYPE="ERR"
+      COLOUR='\033[0;31m'
     ;;
 
     START)
@@ -37,5 +44,9 @@
   esac
 
   if [ ! -z ${DEBUG} ] || { [ -z ${DEBUG} ] && [ "${LOG_TYPE}" != "DBG" ]; }; then
-    echo "{\"time\":\"${LOG_DATE}\",\"type\":\"${LOG_TYPE}\",\"msg\":\"${LOG_MESSAGE}\"}"
+    if [ -z ${ELEVEN_LOG_USE_COLOUR} ]; then
+      echo "{\"time\":\"${LOG_DATE}\",\"type\":\"${LOG_TYPE}\",\"msg\":\"${LOG_MESSAGE}\"}"
+    else
+      echo -e "${COLOUR}{\"time\":\"${LOG_DATE}\",\"type\":\"${LOG_TYPE}\",\"msg\":\"${LOG_MESSAGE}\"}${NC}"
+    fi
   fi
