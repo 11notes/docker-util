@@ -36,6 +36,14 @@
       go mod verify
     ;;
 
+    "build-entrypoint")
+      # eleven go build-entrypoint
+      cd /go/entrypoint
+      go mod edit -go=${APP_GO_VERSION}
+      eleven go build /entrypoint main.go
+      eleven distroless /entrypoint
+    ;;
+
     *)
       eleven log warning "function ${FN} does not exist"
       exit 1
