@@ -16,14 +16,14 @@ With usefull functions for entrypoints.
 # MAIN TAGS 🏷️
 These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
 
-* [4.2.1](https://hub.docker.com/r/11notes/util/tags?name=4.2.1)
+* [4.2.2](https://hub.docker.com/r/11notes/util/tags?name=4.2.2)
 * [latest](https://hub.docker.com/r/11notes/util/tags?name=latest)
 
 # REGISTRIES ☁️
 ```
-docker pull 11notes/util:4.2.1
-docker pull ghcr.io/11notes/util:4.2.1
-docker pull quay.io/11notes/util:4.2.1
+docker pull 11notes/util:4.2.2
+docker pull ghcr.io/11notes/util:4.2.2
+docker pull quay.io/11notes/util:4.2.2
 ```
 
 # SOURCE 💾
@@ -32,4 +32,4 @@ docker pull quay.io/11notes/util:4.2.1
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-util/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-util/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-util/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 15.10.2026, 00:19:31 (CET)*
+*created 15.10.2026, 11:41:59 (CET)*
