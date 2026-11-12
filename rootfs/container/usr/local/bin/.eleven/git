@@ -7,7 +7,7 @@
       INPUT_REPO=$(echo "${1}" | sed 's|https://github.com/||')
       GITHUB_REPO=$(echo "https://github.com/${INPUT_REPO}" | sed 's|\.git$||')
       GITHUB_REPO_API=$(echo "${GITHUB_REPO}" | sed 's|github\.com/|api.github.com/repos/|')
-      GITHUB_PROJECT=$(curl -s ${GITHUB_REPO_API} | jq -r '.name')
+      GITHUB_PROJECT=$(curl -sSL ${GITHUB_REPO_API} | jq -r '.name')
       shift
       GITHUB_COMMIT=${1}
       shift
